@@ -343,7 +343,7 @@ def make_request(url):
                 probe['SSL issues'] = 'unsecure connection enforced'
             else:
                 probe['SSL issues'] = 'redirected to secure url'
-                r   = requests.get(m.group("url"), headers=fake_headers, verify=False, allow_redirects=False)
+                r   = requests.get(m.group("url"), headers=settings.FAKE_HEADERS, verify=False, allow_redirects=False)
                 mix = mixed_content(m.group("url"), r.content)
                 if (mix['resources'] or mix['images']):
                     probe['mixed content'] = True
