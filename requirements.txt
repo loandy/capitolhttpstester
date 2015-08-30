@@ -3,4 +3,5 @@ certifi==2015.04.28
 requests==2.6.0
 sunlight==1.2.8
 urllib3==1.10.4
+Jinja2==2.8
 PyYAML

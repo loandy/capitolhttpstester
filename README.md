@@ -1,24 +1,48 @@
-# examining the ssl certs for senate.gov and house.gov
+# Capitol HTTPS Tester
+*Examining SSL certificates for senate.gov and house.gov*
 
-this code tests US Capitol websites for valid HTTPS configurations. there are
-two major bits of code. `capitolhttpstester.py` and `maketable.py`.  i would
-like to state in my defense i obviously don't know html at all or i would not
-have done it that way. 
+## Introduction
 
-the article that accompanies this post is >
-https://sunlightfoundation.com/blog/2015/05/26/sunlight-analysis-reveals-15-of-congressional-websites-are-https-ready
+This code tests US Capitol websites for valid HTTPS configurations. There are
+two major bits of code: `capitolhttpstester.py`and `maketable.py`.
 
-`captiolhttpstest.py` -- goes out and creates a json summary
+The article that accompanies this post can be found [here](
+https://sunlightfoundation.com/blog/2015/05/26/sunlight-analysis-reveals-15-of-congressional-websites-are-https-ready).
 
-`maketable.py` -- parses that json summary and creates a webpage evaluating and summarizing the results. 
+## Dependencies
 
-`get-cert.sh` -- simple script to go and get SSL certificate for hostname, because learning how to use openssl is painful.
+[pip](https://pip.pypa.io/en/latest/installing.html)
+[virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 
-`install.sh` -- simple script to create virtual env to get this thing up and running not the same as actually making a package!
+## Getting Started
 
-`settings.py.example` -- should be copied to `settings.py` with proper sunlight api key 
+Simply run these commands from your terminal.
 
-all code is GPLv2.0
+```sh
+$ virtualenv --no-site-packages virt
+$ source virt/bin/activate
+$ pip install -r requirements.txt
+$ cp settings.py.example settings.py
+$ edit settings.py # Place your Sunlight API key here.
+$ python capitolhttpstester.py > output.json
+$ python render_template.py output.json
+```
+
+The generated HTML document report should be located under the `rendered` directory as `test_results.html`.
+
+## Important Files
+
+`capitolhttpstest.py` -- Retrieves data and creates a json summary
+
+`render_template.py` -- Parses JSON summary and generates a webpage summarizing the results.
+
+`get-cert.sh` -- Simple script to go and get SSL certificate for hostname, because learning how to use OpenSSL is painful.
+
+`install.sh` -- Simple script to create to get this thing up and running. Not the same as actually making a package!
+
+`settings.py.example` -- Should be copied to `settings.py` with a functioning Sunlight API key.
+
+All code should be covered under GPLv2.0.
 
 --timball@sunlightfoundation.com
 2015-05-25
