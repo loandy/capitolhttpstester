@@ -11,12 +11,12 @@ https://sunlightfoundation.com/blog/2015/05/26/sunlight-analysis-reveals-15-of-c
 
 ## Dependencies
 
-[pip](https://pip.pypa.io/en/latest/installing.html)
-[virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
+* [pip](https://pip.pypa.io/en/latest/installing.html)
+* [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 
 ## Getting Started
 
-Simply run these commands from your terminal.
+To get the basic setup, run the following commands from your terminal:
 
 ```sh
 $ virtualenv --no-site-packages virt
@@ -24,6 +24,29 @@ $ source virt/bin/activate
 $ pip install -r requirements.txt
 $ cp settings.py.example settings.py
 $ edit settings.py # Place your Sunlight API key here.
+```
+
+If you wish to use npm/Grunt, the following commands will install the requisite node modules, kick off the data-gathering script, and then render the results into a final HTML report:
+
+```sh
+$ npm install
+$ grunt --filename=example_filename.json
+```
+The resulting data are placed in output.json by default if no filename is provided, but an arbitrary filename may be provided through the --filename option when running Grunt.
+
+If you wish to only generate the data, or refresh the HTML report, you utilize the following Grunt tasks respectively:
+
+```sh
+$ grunt:data --filename=example_filename.json
+```
+
+```sh
+$ grunt:build --filename=example_filename.json
+```
+
+For this project, Grunt is primarily used for the minification of the resulting HTML report.  If you do not want to use npm/Grunt, simply run the Python scripts manually instead:
+
+```sh
 $ python capitolhttpstester.py > output.json
 $ python render_template.py output.json
 ```
